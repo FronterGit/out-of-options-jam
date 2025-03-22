@@ -23,7 +23,7 @@ public class ShapeSpawner : MonoBehaviour
             GameObject newShape = Instantiate(shape.gameObject, transform.position, Quaternion.identity);
             var shapeComponent = newShape.GetComponent<Shape>();
             
-            //give the shape a destination
+            //give the shape a Destination
             shapeComponent.destination = destination;
             shapeComponent.travelling = true;
         }
