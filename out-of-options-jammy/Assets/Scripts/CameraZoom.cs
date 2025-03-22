@@ -35,11 +35,11 @@ public class CameraZoom : MonoBehaviour
 
         camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, targetZoom, Time.deltaTime * zoomSpeed);
 
-
+        /*
         Vector3 newRotation = Input.GetKey(KeyCode.Space) ? targetRotation : defaultRotation;
         // smooth lerp the camera rotation to the target rotation
         camera.transform.eulerAngles = Vector3.Lerp(camera.transform.eulerAngles, newRotation, Time.deltaTime * zoomSpeed);
-
+        */
 
 
     }
