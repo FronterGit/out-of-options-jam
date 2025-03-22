@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using TMPro;
 
 public class Hole : MonoBehaviour
 {
@@ -12,6 +13,12 @@ public class Hole : MonoBehaviour
     [SerializeField] private Material outlineMaterial;
     private MeshRenderer meshRenderer;
     private Material[] materials;
+    int clickRequired = 1;
+    int clickCount = 0;
+    public bool open = true;
+    
+    //refs
+    public TMP_Text clickCountText;
 
     private void Start()
     {
@@ -20,6 +27,7 @@ public class Hole : MonoBehaviour
         Debug.Log("Hole shape: " + shape);
         meshRenderer = GetComponent<MeshRenderer>();
         materials = meshRenderer.materials;
+        clickCountText.enabled = false;
     }
     
     public void AddOutline()
@@ -39,5 +47,34 @@ public class Hole : MonoBehaviour
     public void RemoveOutline()
     {
         meshRenderer.materials = materials;
+    }
+    
+    public void OpenCover()
+    {
+        Debug.Log("Cover opened");
+        clickRequired = clickRequired * 2;
+        //animate
+        open = true;
+        clickCountText.enabled = false;
+
+    }
+
+    public void buttonPress()
+    {
+        clickCount--;
+        clickCountText.text = clickCount.ToString();
+        if (clickCount == 0)
+        {
+            OpenCover();
+        }
+    }
+
+    public void AcceptShape()
+    {
+        open = false;
+        //animate
+        clickCount = clickRequired;
+        clickCountText.enabled = true;
+        clickCountText.text = clickCount.ToString();
     }
 }

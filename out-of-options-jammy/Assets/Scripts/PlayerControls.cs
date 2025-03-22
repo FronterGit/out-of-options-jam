@@ -34,6 +34,7 @@ public class PlayerControls : MonoBehaviour
     }
     private State state = State.Empty;
     private Hole hoveredHole;
+    private Vector3 hoveredHolePosition;
     private bool correctHole;
     
 
@@ -85,7 +86,14 @@ public class PlayerControls : MonoBehaviour
 
     private void LeftAction(InputAction.CallbackContext context)
     {
-        //Debug.Log("Left Action");
+        switch (state)
+        {
+            case State.Empty:
+                LookForButton();
+                break;
+            case State.Holding:
+                break;
+        }
     }
     
     private void HoldAction(InputAction.CallbackContext context)
@@ -111,7 +119,13 @@ public class PlayerControls : MonoBehaviour
             case State.Empty:
                 break;
             case State.Holding:
-                LoseShape();
+                if (correctHole && hoveredHole.open)
+                {
+                    shapeScript.EnterHole(hoveredHolePosition);
+                    hoveredHole.AcceptShape();
+                    LoseShape();
+                }
+                else LoseShape();
                 break;
         }
     }
@@ -164,6 +178,7 @@ public class PlayerControls : MonoBehaviour
                 if (!hoveredHole)
                 {
                     hoveredHole = hit.collider.GetComponent<Hole>();
+                    hoveredHolePosition = hit.collider.transform.position;
                     hoveredHole.AddOutline();
                     OnLeaveHole += hoveredHole.RemoveOutline;
                 }
@@ -173,9 +188,26 @@ public class PlayerControls : MonoBehaviour
         }
         else
         {
-            correctHole = false;
-            OnLeaveHole?.Invoke();
-            hoveredHole = null;
+            LoseHole();
+        }
+    }
+    
+    private void LookForButton()
+    {
+        var ray = mainCamera.ScreenPointToRay(screenPos);
+        RaycastHit hit;
+        
+        Debug.DrawRay(ray.origin, ray.direction * 100, Color.blue, 5f);
+        //Debug.Log("Raycast");
+
+        if (Physics.Raycast(ray, out hit, 1000, ~rayPlaneLayer))
+        {
+            //check tag of the object we hit
+            if (hit.collider.CompareTag("hole"))
+            {
+                var hole = hit.collider.GetComponent<Hole>();
+                hole.buttonPress();
+            }
         }
     }
     
@@ -224,7 +256,16 @@ public class PlayerControls : MonoBehaviour
         correctHole = false;
         OnLeaveHole?.Invoke();
         hoveredHole = null;
+        hoveredHolePosition = Vector3.zero;
         state = State.Empty;
+        LoseHole();
+    }
+    
+    private void LoseHole()
+    {
+        correctHole = false;
+        OnLeaveHole?.Invoke();
+        hoveredHole = null;
     }
     
     private void ApplyShapePosition()

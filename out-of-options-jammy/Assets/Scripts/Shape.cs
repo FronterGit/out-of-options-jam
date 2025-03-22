@@ -13,6 +13,7 @@ public class Shape : MonoBehaviour
     public Transform destination;
     public Rigidbody rb;
     public float speed = 5;
+    public bool falling = false;
     
     private void Start()
     {
@@ -30,6 +31,11 @@ public class Shape : MonoBehaviour
             //apply a velocity towards the Destination
             Vector3 direction = (destination.position - transform.position).normalized;
             rb.velocity = direction * speed;
+        }
+        if (falling)
+        {
+            //slowly move the shape down
+            transform.position -= Vector3.up * (speed * Time.deltaTime);
         }
     }
 
@@ -62,6 +68,18 @@ public class Shape : MonoBehaviour
             currentRotationIndex = 0;
         }
         transform.rotation = rotations[currentRotationIndex];
+    }
+
+    public void EnterHole(Vector3 position)
+    {
+        //remove the rigidbody component
+        Destroy(rb);
+        
+        //collider is now a trigger
+        GetComponent<Collider>().isTrigger = true;
+        
+        transform.position = position + Vector3.up * 3;
+        falling = true;
     }
 
     private void OnTriggerEnter(Collider other)
