@@ -1,0 +1,74 @@
+{
+    "name": "Input actions",
+    "maps": [
+        {
+            "name": "Mouse",
+            "id": "7a2b9fc7-9bbe-4723-9831-436c8b7033d1",
+            "actions": [
+                {
+                    "name": "L action",
+                    "type": "Button",
+                    "id": "803f9df7-0fc9-40d4-8745-fcb57e59a988",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "R action",
+                    "type": "Button",
+                    "id": "e5b7c826-008e-414e-a5c1-b151942dac39",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Hold",
+                    "type": "Button",
+                    "id": "c10f0395-1529-495e-8186-48f57ab9e606",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "5088b24b-9a7d-4bcf-b7bc-91fe9c8e1f6b",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "L action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bd830575-4579-460b-aa1b-9998280449c0",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "R action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d01d974d-977d-4ea1-a9de-4b7c5d9813b2",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Hold(pressPoint=0.01)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Hold",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
