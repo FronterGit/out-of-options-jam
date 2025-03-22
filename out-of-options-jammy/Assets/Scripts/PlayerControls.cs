@@ -194,14 +194,9 @@ public class PlayerControls : MonoBehaviour
     {
         shape = hit.collider.gameObject;
         shapeScript = shape.GetComponent<Shape>();
-        
-        //reset shape rotation
-        shapeScript.currentRotationIndex = 0;
-        shape.transform.rotation = shapeScript.rotations[shapeScript.currentRotationIndex];
-        
-        //reset any velocity the shape has
-        shape.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        shape.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+
+        shapeScript.OnGrab();
+
         
         state = State.Holding;
         //Debug.Log("Hit shape");

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1810357062532882678}
   - component: {fileID: 4144543856530853618}
   - component: {fileID: 3361564917151177516}
+  - component: {fileID: 3206002981447359076}
   m_Layer: 6
   m_Name: Cube
   m_TagString: shape
@@ -146,6 +147,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6417e51cc0d05e74fa62d211bd32597e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotations: []
+  rotations:
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
   currentRotationIndex: 0
-  shapeType: 0
+  shape: 0
+  travelling: 0
+  destination: {fileID: 0}
+  rb: {fileID: 0}
+  speed: 5
+--- !u!114 &3206002981447359076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8967949684777659034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac77175c4821aeb4b8118dc02a611228, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shape: 0
