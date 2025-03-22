@@ -23,6 +23,9 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] private LayerMask rayPlaneLayer;
     [SerializeField] private LayerMask holeLayer;
     
+    //EVENTS
+    private event Action OnLeaveHole;
+    
     //VARS
     private enum State
     {
@@ -30,6 +33,7 @@ public class PlayerControls : MonoBehaviour
         Holding
     }
     private State state = State.Empty;
+    private Hole hoveredHole;
     private bool correctHole;
     
 
@@ -157,12 +161,21 @@ public class PlayerControls : MonoBehaviour
             //check tag of the object we hit
             if (hit.collider.CompareTag("hole"))
             {
+                if (!hoveredHole)
+                {
+                    hoveredHole = hit.collider.GetComponent<Hole>();
+                    hoveredHole.AddOutline();
+                    OnLeaveHole += hoveredHole.RemoveOutline;
+                }
                 CheckHole(hit);
             }
-            else
-            {
-                correctHole = false;
-            }
+
+        }
+        else
+        {
+            correctHole = false;
+            OnLeaveHole?.Invoke();
+            hoveredHole = null;
         }
     }
     
@@ -204,9 +217,13 @@ public class PlayerControls : MonoBehaviour
     
     private void LoseShape()
     {
+        shapeScript.OnLose();
         //lose reference to shape
         shape = null;
         shapeScript = null;
+        correctHole = false;
+        OnLeaveHole?.Invoke();
+        hoveredHole = null;
         state = State.Empty;
     }
     
