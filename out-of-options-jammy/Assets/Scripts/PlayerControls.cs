@@ -31,8 +31,8 @@ public class PlayerControls : MonoBehaviour
     bool fadeInText = false;
     bool fadeOutText = false;
     float fadeSpeed = 1;
-    bool firstLeftAction = true;
-    bool firstRightAction = true;
+    public bool firstLeftAction = true;
+    public bool firstRightAction = true;
     
     //EVENTS
     private event Action OnLeaveHole;
@@ -114,7 +114,7 @@ public class PlayerControls : MonoBehaviour
             {
                 fadeOutText = false;
 
-                if (!firstLeftAction)
+                if (!firstLeftAction && firstRightAction)
                 {
                     tutorialTextUI.text = tutorialText[tutorialIndex];
                     fadeInText = true;
@@ -155,6 +155,7 @@ public class PlayerControls : MonoBehaviour
         {
             fadeOutText = true;
             tutorialIndex++;
+            firstLeftAction = false;
         }
     }
     
@@ -171,6 +172,20 @@ public class PlayerControls : MonoBehaviour
                 {
                     shapeScript.EnterHole(hoveredHolePosition);
                     hoveredHole.AcceptShape();
+                    
+                    //if it's a square hole
+                    if (hoveredHole.shape == ShapeType.Shape.Square)
+                    {
+                        var sqhole = hoveredHole.GetComponent<SquareHole>();
+                        
+                        //if we used the correct shape
+                        if(shapeScript.shape == ShapeType.Shape.Square)
+                        {
+                            sqhole.SquareHoleActivatedRight();
+                        }
+                        else sqhole.SquareHoleActivatedWrong();
+                    }
+                    
                     LoseShape();
                 }
                 else LoseShape();
@@ -194,6 +209,7 @@ public class PlayerControls : MonoBehaviour
         if(firstRightAction)
         {
             fadeOutText = true;
+            firstRightAction = false;
         }
     }
     
@@ -237,7 +253,17 @@ public class PlayerControls : MonoBehaviour
                 }
                 CheckHole(hit);
             }
-
+            else if (hit.collider.CompareTag("squarehole"))
+            {
+                if (!hoveredHole)
+                {
+                    hoveredHole = hit.collider.GetComponent<SquareHole>();
+                    hoveredHolePosition = hit.collider.transform.position;
+                    hoveredHole.AddOutline();
+                    OnLeaveHole += hoveredHole.RemoveOutline;
+                }
+                CheckSquareHole(hit);
+            }
         }
         else
         {
@@ -268,6 +294,13 @@ public class PlayerControls : MonoBehaviour
     {
         var hole = hit;
         Hole holeScript = hole.collider.GetComponent<Hole>();
+
+        if (holeScript.shape == ShapeType.Shape.Square)
+        {
+            Debug.Log(holeScript.shape);
+            CheckSquareHole(hit);
+            return;
+        }
         
         if (holeScript.shape == shapeScript.shape)
         {
@@ -285,6 +318,30 @@ public class PlayerControls : MonoBehaviour
         else
         {
             Debug.Log("Incorrect Shape: " + shapeScript.shape + " Hole: " + holeScript.shape);
+        }
+    }
+
+    private void CheckSquareHole(RaycastHit hit)
+    {
+        var hole = hit;
+        SquareHole squareHole = hole.collider.GetComponent<SquareHole>();
+
+        //look up our shape in the SquareHole shape list
+        if (shapeScript.shape == null) return;
+        
+        if (squareHole.acceptedShapes.Contains(shapeScript.shape))
+        {
+            int shapeIndex = squareHole.acceptedShapes.IndexOf(shapeScript.shape);
+            //if the shape is in the correct rotation
+            if (squareHole.acceptedRotations[shapeIndex] == shapeScript.currentRotationIndex)
+            {
+                Debug.Log("Correct Shape and Rotation");
+                correctHole = true;
+            }
+            else
+            {
+                Debug.Log("Correct Shape but Incorrect Rotation");
+            }
         }
     }
 

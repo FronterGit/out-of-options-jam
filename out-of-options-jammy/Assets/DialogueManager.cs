@@ -14,7 +14,32 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private float fadeSpeed = 1;
     private bool fadeTextIn = false;
     private bool fadeTextOut = false;
+    
+    [SerializeField] private AudioClip squareCorrectClip;
+    [SerializeField] private string squareCorrectText;
+    
+    [SerializeField] private AudioClip firstHoleUsedClip;
+    [SerializeField] private string firstHoleUsedText;
+    
+    [SerializeField] private List<AudioClip> squareClips = new List<AudioClip>();
+    [SerializeField] private List<String> squareText = new List<String>();
+    private int squareClipIndex = 0;
 
+    private void OnEnable()
+    {
+        SquareHole.OnSquarePlacedRight += OnSquareUsedCorrect;
+        SquareHole.OnSquarePlacedWrong += OnSquareUsedWrong;
+        
+        Hole.firstUsedEvent += OnFirstHoleUsed;
+    }
+    
+    private void OnDisable()
+    {
+        SquareHole.OnSquarePlacedRight -= OnSquareUsedCorrect;
+        SquareHole.OnSquarePlacedWrong -= OnSquareUsedWrong;
+        
+        Hole.firstUsedEvent -= OnFirstHoleUsed;
+    }
 
     private void Update()
     {
@@ -87,5 +112,42 @@ public class DialogueManager : MonoBehaviour
         {
             playerControls.enabled = true;
         }
+    }
+    
+    public void OnSquareUsedCorrect()
+    {
+        AudioSource audioSource = GetComponent<AudioSource>();
+        audioSource.clip = squareCorrectClip;
+        audioSource.Play();
+        dialogueText.text = squareCorrectText;
+        fadeTextIn = true;
+    }
+    
+    public void OnSquareUsedWrong()
+    {
+        AudioSource audioSource = GetComponent<AudioSource>();
+        audioSource.clip = squareClips[squareClipIndex];
+        audioSource.Play();
+        dialogueText.text = squareText[squareClipIndex];
+        fadeTextIn = true;
+        
+        StartCoroutine(WaitForClipToEnd(squareClips[squareClipIndex].length));
+        squareClipIndex++;
+    }
+    
+    public void OnFirstHoleUsed()
+    {
+        AudioSource audioSource = GetComponent<AudioSource>();
+        audioSource.clip = firstHoleUsedClip;
+        audioSource.Play();
+        dialogueText.text = firstHoleUsedText;
+        fadeTextIn = true;
+        StartCoroutine(WaitForClipToEnd(firstHoleUsedClip.length));
+    }
+
+    private IEnumerator WaitForClipToEnd(float wait)
+    {
+        yield return new WaitForSeconds(wait);
+        fadeTextOut = true;
     }
 }

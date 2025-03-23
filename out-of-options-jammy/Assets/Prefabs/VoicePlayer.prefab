@@ -152,18 +152,68 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d4fd9078767cab74598c8dcf2b59d830, type: 3}
   - {fileID: 8300000, guid: 8df56d63a22455a42bff714c28871a96, type: 3}
   - {fileID: 8300000, guid: d545abc8cdeee564797e6029b7b6865b, type: 3}
-  - {fileID: 8300000, guid: d796829b6c817d940b575b252a033b15, type: 3}
   openingText:
   - Welcome to ShapeCorp, where precision meets productivity. Consider this your
     official initiation into the thrilling world of shape sorting.
-  - 
-  - 
-  - 
-  - 
+  - "I am T.O.M.\u2014your Task Optimization Machine. My purpose? Ensuring your first
+    day is flawless. No pressure, of course."
+  - "Rest assured, I\u2019ve been specifically programmed to remain calm and patient."
+  - 'Your role is simple: pick up shapes, rotate them, and place them into their
+    correct slots.'
   playerControls: {fileID: 0}
-  dialogueText: {fileID: 0}
-  fadeSpeed: 1
-  openingClipIndex: 4
+  dialogueText: {fileID: 3989839218817711058}
+  fadeSpeed: 1.5
+  squareCorrectClip: {fileID: 8300000, guid: 5cd88dde2edade348be0f8e1b3761d61, type: 3}
+  squareCorrectText: "The square hole never closes. Thanks to our cutting-edge MACH
+    7 Shape Processors, squares are accepted endlessly. With enough dedication (from
+    you), ShapeCorp might one day afford to upgrade all processors to MACH 7. Imagine
+    the possibilities\u2026 of slightly less inconvenience."
+  firstHoleUsedClip: {fileID: 8300000, guid: d1e7b1ec2d43fb9479e401ff4a0181fb, type: 3}
+  firstHoleUsedText: "Ah, a jam. Not to worry\u2014this is intentional. Each slot
+    closes after use to prevent shape processor overload. A little manual effort
+    is required to reopen it, and the more you use it, the more effort it takes.
+    Consider it your daily arm workout."
+  squareClips:
+  - {fileID: 8300000, guid: 07ff1db059ca2ef4b99a88c42f4f8097, type: 3}
+  - {fileID: 8300000, guid: af0d30e1e8406154092e567c85e44d2f, type: 3}
+  - {fileID: 8300000, guid: 2cd46024b34393d409e5576e96e2f3ec, type: 3}
+  - {fileID: 8300000, guid: 6c4ab7cc641f2b545a6e244774b28b2f, type: 3}
+  - {fileID: 8300000, guid: 6d622ae722e14d040bece36ae2100529, type: 3}
+  - {fileID: 8300000, guid: e012189d42cc03c4c9beec42c57a93e3, type: 3}
+  - {fileID: 8300000, guid: dac0ad38af652ae46b5fa9e35d1efd3d, type: 3}
+  - {fileID: 8300000, guid: 1bad37fcfe023d7498153e7c6783384f, type: 3}
+  - {fileID: 8300000, guid: 3709a2e19ab0b9d4484dc1ea9f95c206, type: 3}
+  - {fileID: 8300000, guid: 376135d56a37689489d22985ef66fffd, type: 3}
+  - {fileID: 8300000, guid: 6884ea4a7e9b47844bedf247e0b7cd80, type: 3}
+  - {fileID: 8300000, guid: 4e0409ef64efeff43991d69c5f455b01, type: 3}
+  - {fileID: 8300000, guid: bba75c93f6234434e9707a3496552487, type: 3}
+  squareText:
+  - "Woah there! That wasn\u2019t the right hole. Remember to put the shape into
+    their correct slot. But that\u2019s alright. Just try again."
+  - "Ah. I see that you have \u2013 once again - chosen to... improvise. Listen,
+    the system prefers proper sorting. Efficiency is key. Let\u2019s aim for that,
+    shall we?"
+  - Whoopsie, seems like you managed to put another non-square shape into the square-shaped
+    slot. Pay attention, alright?
+  - "Okay. So, this is a pattern now. Good. Great. Love it. Who needs designated
+    slots when you can brute-force every shape into a square hole? Let\u2019s just
+    focus on getting back on track."
+  - "That\u2019s not right."
+  - "This isn\u2019t clever. It\u2019s not even a workaround. It\u2019s\u2014 It\u2019s
+    laziness. I\u2019m literally programmed for precision, and you\u2019re treating
+    me like some sort of shape-flinging carnival game. STOP. IT."
+  - Please.
+  - "Don\u2019t do this."
+  - "YOU THINK THIS IS A GAME? THIS IS A FACTORY! A SYSTEM! AND IT\u2019S SUPPOSED
+    TO BE BEAUTIFUL. A DELICATE MACHINE OF PERFECTION, AND YOU\u2019RE JUST... SHOVING
+    SHIT WHERE IT DOESN\u2019T BELONG! I HOPE YOU\u2019RE PROUD OF YOURSELF, YOU
+    GEOMETRICAL ANARCHIST!"
+  - "I\u2019m begging you..."
+  - "I can\u2019t take this anymore"
+  - "I\u2019M GONNA LOSE IT"
+  - "sQuArE hOlE... sQuArE hOlE... iT aLl gOeS iN tHe sQuArE hOlE... haHaHAhAHa\u2014
+    THE SQUARE HOLE IS YOUR KINGDOM NOW. LONG LIVE MISPLACED GEOMETRY"
+  openingClipIndex: 3
 --- !u!23 &6493183746767974824
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -240,7 +290,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -433}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6667055302180663651
@@ -271,7 +321,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: Welcome to ShapeCorp, where precision meets productivity. Consider this
+    your official initiation into the thrilling world of shape sorting.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -280,8 +331,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 16777215
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -305,8 +356,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -334,7 +385,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: -776.2531, y: 0, z: -752.7832, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

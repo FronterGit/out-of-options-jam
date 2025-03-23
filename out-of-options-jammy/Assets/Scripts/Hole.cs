@@ -17,6 +17,9 @@ public class Hole : MonoBehaviour
     int clickCount = 0;
     public bool open = true;
     
+    public static event Action firstUsedEvent; 
+    public bool firstUsed = false;
+    
     //refs
     public TMP_Text clickCountText;
 
@@ -84,5 +87,11 @@ public class Hole : MonoBehaviour
         clickCount = clickRequired;
         clickCountText.enabled = true;
         clickCountText.text = clickCount.ToString();
+        
+        if (!firstUsed)
+        {
+            firstUsed = true;
+            firstUsedEvent?.Invoke();
+        }
     }
 }

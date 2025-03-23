@@ -8,6 +8,7 @@ TagManager:
   - rayPlane
   - hole
   - destination
+  - squarehole
   layers:
   - Default
   - TransparentFX

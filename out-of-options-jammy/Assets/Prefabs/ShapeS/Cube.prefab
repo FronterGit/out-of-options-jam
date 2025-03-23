@@ -152,7 +152,7 @@ MonoBehaviour:
   - {x: 0, y: 0, z: 0, w: 0}
   - {x: 0.044490576, y: 0.033713203, z: 0.024614332, w: 0.9981374}
   currentRotationIndex: 0
-  shape: 0
+  shape: 1
   travelling: 0
   destination: {fileID: 0}
   rb: {fileID: 0}
