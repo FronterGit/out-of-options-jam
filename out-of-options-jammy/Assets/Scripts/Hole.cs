@@ -52,7 +52,7 @@ public class Hole : MonoBehaviour
     public void OpenCover()
     {
         Debug.Log("Cover opened");
-        clickRequired = clickRequired * 2;
+        clickRequired *= 2;
         //animate
         open = true;
         clickCountText.enabled = false;
@@ -61,6 +61,8 @@ public class Hole : MonoBehaviour
 
     public void buttonPress()
     {
+        if (open) return;
+        
         clickCount--;
         clickCountText.text = clickCount.ToString();
         if (clickCount == 0)
@@ -71,6 +73,11 @@ public class Hole : MonoBehaviour
 
     public void AcceptShape()
     {
+        if (shape == ShapeType.Shape.Square)
+        {
+            //animate close and then open
+        };
+        
         open = false;
         //animate
         clickCount = clickRequired;
