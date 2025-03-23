@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
+using TMPro;
 
 public class PlayerControls : MonoBehaviour
 {
@@ -22,6 +24,15 @@ public class PlayerControls : MonoBehaviour
     //LAYERS
     [SerializeField] private LayerMask rayPlaneLayer;
     [SerializeField] private LayerMask holeLayer;
+    
+    [SerializeField] private List<string> tutorialText = new List<string>();
+    private int tutorialIndex = 0;
+    [SerializeField] private TMPro.TMP_Text tutorialTextUI;
+    bool fadeInText = false;
+    bool fadeOutText = false;
+    float fadeSpeed = 1;
+    bool firstLeftAction = true;
+    bool firstRightAction = true;
     
     //EVENTS
     private event Action OnLeaveHole;
@@ -67,25 +78,13 @@ public class PlayerControls : MonoBehaviour
     private void Start()
     {
         mainCamera = Camera.main;
+        
+        tutorialTextUI.text = tutorialText[tutorialIndex];
+        fadeInText = true;
     }
 
     private void Update()
     {
-        // if (!controlsEnabled) return;
-        //
-        // if (controlsEnabled && once)
-        // {
-        //     leftAction.action.Enable();
-        //     rightAction.action.Enable();
-        //     holdAction.action.Enable();
-        //
-        //     leftAction.action.started += LeftAction;
-        //     rightAction.action.started += RightAction;
-        //     holdAction.action.started += HoldAction;
-        //     holdAction.action.canceled += CancelHoldAction;
-        //     once = false;
-        // }
-        
         //get mouse position
         screenPos = Mouse.current.position.ReadValue();
         
@@ -98,6 +97,33 @@ public class PlayerControls : MonoBehaviour
                 LookForHole();
                 break;
         }
+        
+        if(fadeInText)
+        {
+            tutorialTextUI.color = new Color(tutorialTextUI.color.r, tutorialTextUI.color.g, tutorialTextUI.color.b, tutorialTextUI.color.a + Time.deltaTime * fadeSpeed);
+            if (tutorialTextUI.color.a >= 1)
+            {
+                fadeInText = false;
+            }
+        }
+        
+        if(fadeOutText)
+        {
+            tutorialTextUI.color = new Color(tutorialTextUI.color.r, tutorialTextUI.color.g, tutorialTextUI.color.b, tutorialTextUI.color.a - Time.deltaTime * fadeSpeed);
+            if (tutorialTextUI.color.a <= 0)
+            {
+                fadeOutText = false;
+
+                if (!firstLeftAction)
+                {
+                    tutorialTextUI.text = tutorialText[tutorialIndex];
+                    fadeInText = true;
+                }
+            }
+        }
+        
+        //text follows mouse position
+        tutorialTextUI.transform.position = screenPos;
     }
 
     private void LeftAction(InputAction.CallbackContext context)
@@ -123,6 +149,12 @@ public class PlayerControls : MonoBehaviour
                 break;
             case State.Holding:
                 break;
+        }
+        
+        if(firstLeftAction)
+        {
+            fadeOutText = true;
+            tutorialIndex++;
         }
     }
     
@@ -157,6 +189,11 @@ public class PlayerControls : MonoBehaviour
             case State.Holding:
                 shapeScript.NextRotation();
                 break;
+        }
+        
+        if(firstRightAction)
+        {
+            fadeOutText = true;
         }
     }
     
