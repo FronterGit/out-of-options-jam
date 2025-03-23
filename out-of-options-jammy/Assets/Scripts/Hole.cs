@@ -76,6 +76,7 @@ public class Hole : MonoBehaviour
         if (shape == ShapeType.Shape.Square)
         {
             //animate close and then open
+            return;
         };
         
         open = false;

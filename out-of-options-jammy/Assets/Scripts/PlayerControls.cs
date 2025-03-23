@@ -36,7 +36,8 @@ public class PlayerControls : MonoBehaviour
     private Hole hoveredHole;
     private Vector3 hoveredHolePosition;
     private bool correctHole;
-    
+    private bool controlsEnabled = false;
+    private bool once = true;
 
     private void OnEnable()
     {
@@ -70,6 +71,21 @@ public class PlayerControls : MonoBehaviour
 
     private void Update()
     {
+        // if (!controlsEnabled) return;
+        //
+        // if (controlsEnabled && once)
+        // {
+        //     leftAction.action.Enable();
+        //     rightAction.action.Enable();
+        //     holdAction.action.Enable();
+        //
+        //     leftAction.action.started += LeftAction;
+        //     rightAction.action.started += RightAction;
+        //     holdAction.action.started += HoldAction;
+        //     holdAction.action.canceled += CancelHoldAction;
+        //     once = false;
+        // }
+        
         //get mouse position
         screenPos = Mouse.current.position.ReadValue();
         
