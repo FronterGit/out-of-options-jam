@@ -307,19 +307,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -1248503241722648360, guid: fbbd53b0a62a1aa4d8a37e1fefb98f32, type: 3}
       propertyPath: acceptedShapes.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -1248503241722648360, guid: fbbd53b0a62a1aa4d8a37e1fefb98f32, type: 3}
       propertyPath: acceptedRotations.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -1248503241722648360, guid: fbbd53b0a62a1aa4d8a37e1fefb98f32, type: 3}
       propertyPath: acceptedShapes.Array.data[1]
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -1248503241722648360, guid: fbbd53b0a62a1aa4d8a37e1fefb98f32, type: 3}
+      propertyPath: acceptedShapes.Array.data[2]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: -1248503241722648360, guid: fbbd53b0a62a1aa4d8a37e1fefb98f32, type: 3}
       propertyPath: acceptedRotations.Array.data[1]
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1248503241722648360, guid: fbbd53b0a62a1aa4d8a37e1fefb98f32, type: 3}
+      propertyPath: acceptedRotations.Array.data[2]
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1222990224275860086, guid: fbbd53b0a62a1aa4d8a37e1fefb98f32, type: 3}
       propertyPath: m_Name
