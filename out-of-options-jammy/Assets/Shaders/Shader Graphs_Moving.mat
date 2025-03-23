@@ -36,6 +36,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _Normal:
+        m_Texture: {fileID: 2800000, guid: 7258b1b4c164ae7499078fb4cd268ded, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _Texture2D:
         m_Texture: {fileID: 2800000, guid: a18fd3a9abfbeee4da9f95a03e052a11, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -58,5 +62,5 @@ Material:
     - _QueueOffset: 0
     - _Scale: 6
     m_Colors:
-    - _Direction: {r: 0, g: -0.5, b: 0, a: 0}
+    - _Direction: {r: 0, g: -0.65, b: 0, a: 0}
   m_BuildTextureStacks: []
