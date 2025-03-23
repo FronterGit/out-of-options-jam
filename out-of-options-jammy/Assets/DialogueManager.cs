@@ -6,6 +6,8 @@ using UnityEngine;
 public class DialogueManager : MonoBehaviour
 {
     [SerializeField] private List<AudioClip> openingClips = new List<AudioClip>();
+    [SerializeField] private List<String> openingText = new List<String>();
+    
     private bool gameStarted = false;
     [SerializeField] private PlayerControls playerControls;
 
