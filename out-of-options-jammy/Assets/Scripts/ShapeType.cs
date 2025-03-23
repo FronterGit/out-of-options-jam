@@ -7,8 +7,11 @@ public class ShapeType : MonoBehaviour
     public enum Shape
     {
         Square,
-        Triangle,
-        Circle
+        Pyramid,
+        Circle,
+        Bridge,
+        SemiCircle,
+        Star
     }
     public Shape shape;
 }
