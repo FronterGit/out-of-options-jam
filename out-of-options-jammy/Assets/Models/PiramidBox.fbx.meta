@@ -3,7 +3,12 @@ guid: 164b45d0f2375e44d941914f1abeb210
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: yuh
+    second: {fileID: 2800000, guid: 3d958f1296a3f90448f274356c33c940, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
